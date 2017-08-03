@@ -1,5 +1,7 @@
-# Imp
-Imp is a tiny yet useful Xcode extension for sorting import statements in a file.
+# Imp 😈
+Imp is a tiny yet useful Xcode extension, which allows you to sort import declarations and remove duplicates. Sorting import statements is a good quality coding practice and Imp is here to help you.
+
+**Tame the Imp by binding a key in Xcode preferences**
 
 ## Supported languages
 Objective-C, Swift
@@ -7,7 +9,8 @@ Objective-C, Swift
 ## Features
 
 - [x] Basic import sorting
-- [ ] The class header on top
+- [ ] The class header on top, separated by new line
+- [ ] Remove duplicates
 - [ ] Split frameworks and headers imports
 - [ ] Sorting selected lines
 - [ ] Settings
@@ -30,6 +33,9 @@ Clone and Run the project with Xcode >= 8 (make sure the App and the Extension a
 8. Run ``Imp.app`` and close it (the app need to be run at least once)
 9. Go to System Preferences -> Extensions and check if ``Imp Tools`` is enabled in Xcode Source Editor section (or ``Imp`` in All section)
 10. ``Imp Tools`` should now be available from Xcode's Editor menu
+11. Bind a key for ``Sort imports`` command
+12. Find a Large Class with many messy imports
+13. Hit the key and enjoy the magic!
 
-## Enjoy!
+## Thank you
 For any questions or feedbacks, feel free to contact me directly via Telegram: @alexxxander
