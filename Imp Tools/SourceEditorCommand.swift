@@ -32,7 +32,7 @@ extension SourceEditorCommand {
         
         let importIndexes = text.indexesOfObjects(passingTest:) { (object, index, stop) -> Bool in
             let line = object as! String
-            return line.contains("import")
+            return line.hasPrefix("import") || line.hasPrefix("#import")
         }
         
         if importIndexes.isEmpty {
@@ -45,7 +45,15 @@ extension SourceEditorCommand {
             return line1 < line2
         }
         
-        text.replaceObjects(at: importIndexes, with: sortedLines)
+        text.removeObjects(at: importIndexes)
+        
+        let firstImportIndex = importIndexes.first
+        let importsRange = Range(uncheckedBounds: (lower: firstImportIndex!, upper: firstImportIndex! + importIndexes.count))
+        
+        var sortedIndexSet = IndexSet()
+        sortedIndexSet.insert(integersIn: importsRange)
+        
+        text.insert(sortedLines, at: sortedIndexSet)
     }
     
 }
