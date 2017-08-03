@@ -40,7 +40,12 @@ extension SourceEditorCommand {
         }
         
         let importLines = text.objects(at: importIndexes)
-                
+        let sortedLines = importLines.sorted { (obj1, obj2) -> Bool in
+            let line1 = obj1 as! String, line2 = obj2 as! String
+            return line1 < line2
+        }
+        
+        text.replaceObjects(at: importIndexes, with: sortedLines)
     }
- 
+    
 }
