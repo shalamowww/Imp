@@ -66,10 +66,12 @@ extension SourceEditorCommand {
                 for (index, line) in sortedLines.enumerated() {
                     let string = line as! String
                     let matches = string.matches(for: classExtractionRegex)
-                    let extractedClass = matches.first!
-                    if className == extractedClass {
-                        self.pushOwnHeaderTop(headerIndex: index, in: finalLines)
-                        break
+                    if matches.count > 0 {
+                        let extractedClass = matches.first!
+                        if className == extractedClass {
+                            self.pushOwnHeaderTop(headerIndex: index, in: finalLines)
+                            break
+                        }
                     }
                 }
             }
