@@ -9,18 +9,18 @@ Objective-C, Swift
 ## Features
 
 - [x] Basic import sorting
-- [ ] The class header on top, separated by new line
+- [x] The class header on top, separated by new line
+- [x] Split frameworks and headers imports
 - [ ] Remove duplicates
-- [ ] Split frameworks and headers imports
 - [ ] Sorting selected lines
-- [ ] Settings
+- [ ] More settings
 
 If you have an idea for a new feature, please file an issue and tell me more.
 
 ## Installation
 
 ### Demo way
-Clone and Run the project with Xcode >= 8 (make sure the App and the Extension are signed with your developer account)
+Clone and Run the project with Xcode 8+ (make sure the App and the Extension are signed with your developer account)
 
 ### Right way
 1. Open ``Imp.xcodeproj``
@@ -36,6 +36,17 @@ Clone and Run the project with Xcode >= 8 (make sure the App and the Extension a
 11. Bind a key for ``Sort imports`` command
 12. Find a Large Class with many messy imports
 13. Hit the key and enjoy the magic!
+
+## Settings
+Just run ``Imp`` from your Applications folder. No need in restarting Xcode to apply the changes!
+
+## How to uninstall
+1. Disable the extension in System Preferences
+2. Delete the App from Applications folder
+3. Feel sorry
+
+## Known limitations (objC)
+Imp doesn’t like messy code and may think that the first @implementation (or @interface, in case no implementation found) he founds is the class you are working with. Xcode doesn’t provide any information on the current file, so little fella has to guess it. It will affect the header which will (or will not) be popped to top with “own header on top” setting.
 
 ## Thank you
 For any questions or feedbacks, feel free to contact me directly via Telegram: @alexxxander

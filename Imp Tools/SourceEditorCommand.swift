@@ -11,6 +11,8 @@ import XcodeKit
 
 class SourceEditorCommand: NSObject, XCSourceEditorCommand {
     
+    var isSwiftFile = true
+    
     func perform(with invocation: XCSourceEditorCommandInvocation, completionHandler: @escaping (Error?) -> Void ) -> Void {
         
         if invocation.buffer.lines.count == 0 {
@@ -27,12 +29,21 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
 }
 
 extension SourceEditorCommand {
-
+    
+    static let suiteId = "imp.ftw"
+    
     fileprivate func sortImports(in text: NSMutableArray) {
         
         let importIndexes = text.indexesOfObjects(passingTest:) { (object, index, stop) -> Bool in
             let line = object as! String
-            return line.hasPrefix("import") || line.hasPrefix("#import")
+            if line.hasPrefix("import") {
+                return true
+            } else if line.hasPrefix("#import") {
+                self.isSwiftFile = false
+                return true
+            } else {
+                return false
+            }
         }
         
         if importIndexes.isEmpty {
@@ -45,15 +56,88 @@ extension SourceEditorCommand {
             return line1 < line2
         }
         
+        let finalLines = NSMutableArray(array: sortedLines)
         text.removeObjects(at: importIndexes)
         
-        let firstImportIndex = importIndexes.first
-        let importsRange = Range(uncheckedBounds: (lower: firstImportIndex!, upper: firstImportIndex! + importIndexes.count))
+        // Own header to top logic
+        if !self.isSwiftFile && self.shouldPutOwnHeaderOnTop() {
+            if let className = self.getFileClass(in: text.copy() as! NSArray) {
+                let classExtractionRegex = "(?<=.\").*(?=\\.h\")"
+                for (index, line) in sortedLines.enumerated() {
+                    let string = line as! String
+                    let matches = string.matches(for: classExtractionRegex)
+                    let extractedClass = matches.first!
+                    if className == extractedClass {
+                        self.pushOwnHeaderTop(headerIndex: index, in: finalLines)
+                        break
+                    }
+                }
+            }
+        }
+        
+        if self.shouldSeparateFrameworks() {
+            for (index, line) in finalLines.enumerated() {
+                let string = line as! String
+                if string.hasPrefix("#import") && string.contains("<") {
+                    finalLines.insert("\n", at: index)
+                    break
+                }
+            }
+        }
+        
+        let firstImportIndex = importIndexes.first!
+        let importsRange = Range(uncheckedBounds: (lower: firstImportIndex, upper: firstImportIndex + finalLines.count))
         
         var sortedIndexSet = IndexSet()
         sortedIndexSet.insert(integersIn: importsRange)
         
-        text.insert(sortedLines, at: sortedIndexSet)
+        text.insert(finalLines.copy() as! [Any], at: sortedIndexSet)
+    }
+    
+    fileprivate func shouldPutOwnHeaderOnTop() -> Bool {
+        let defaults = UserDefaults.init(suiteName: SourceEditorCommand.suiteId)
+        return !(defaults?.bool(forKey: "ignore_own_header") ?? false)
+    }
+    
+    fileprivate func shouldSeparateFrameworks() -> Bool {
+        let defaults = UserDefaults.init(suiteName: SourceEditorCommand.suiteId)
+        return !(defaults?.bool(forKey: "ignore_frameworks_section") ?? false)
+    }
+    
+    fileprivate func pushOwnHeaderTop(headerIndex: Int, in lines: NSMutableArray) {
+        let header = lines[headerIndex]
+        lines.removeObject(at: headerIndex)
+        lines.insert(header, at: 0)
+        lines.insert("\n", at: 1)
+    }
+    
+    fileprivate func getFileClass(in text: NSArray) -> String? {
+        
+        var implementations = [String]()
+        var interfaces = [String]()
+        let interfaceDeclaration = "@interface"
+        let implementationDeclaration = "@implementation"
+        
+        text.enumerateObjects({ (obj, idx, stop) in
+            let line = obj as! String
+            if line.contains(implementationDeclaration) {
+                implementations.append(line.matches(for: "(?<=\\"+implementationDeclaration+"\\s)\\w+").first!)
+            } else if line.contains(interfaceDeclaration) {
+                interfaces.append(line.matches(for: "(?<=\\"+interfaceDeclaration+"\\s)\\w+").first!)
+            }
+        })
+        
+        // TODO: somehow distinguish the class if a file has several interfaces/implementations (xcode doesnt provide a file name)
+        
+        if implementations.count > 0 {
+            return implementations.first
+        }
+        
+        if interfaces.count > 0 {
+            return interfaces.first
+        }
+        
+        return nil
     }
     
 }

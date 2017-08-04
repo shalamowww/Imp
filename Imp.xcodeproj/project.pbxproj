@@ -14,6 +14,7 @@
 		E3C9F17D1F3336370058AFC1 /* SourceEditorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C9F17C1F3336370058AFC1 /* SourceEditorExtension.swift */; };
 		E3C9F17F1F3336370058AFC1 /* SourceEditorCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C9F17E1F3336370058AFC1 /* SourceEditorCommand.swift */; };
 		E3C9F1831F3336370058AFC1 /* Imp Tools.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E3C9F1751F3336370058AFC1 /* Imp Tools.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		E3CAC4BC1F347F2E00C75AA8 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CAC4BB1F347F2E00C75AA8 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,8 @@
 		E3C9F17C1F3336370058AFC1 /* SourceEditorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceEditorExtension.swift; sourceTree = "<group>"; };
 		E3C9F17E1F3336370058AFC1 /* SourceEditorCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceEditorCommand.swift; sourceTree = "<group>"; };
 		E3C9F1801F3336370058AFC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E3CAC4B81F3469E100C75AA8 /* Imp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Imp.entitlements; sourceTree = "<group>"; };
+		E3CAC4BB1F347F2E00C75AA8 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +98,7 @@
 		E3C9F1631F3335790058AFC1 /* Imp */ = {
 			isa = PBXGroup;
 			children = (
+				E3CAC4B81F3469E100C75AA8 /* Imp.entitlements */,
 				E3C9F1641F3335790058AFC1 /* AppDelegate.swift */,
 				E3C9F1661F3335790058AFC1 /* Assets.xcassets */,
 				E3C9F1681F3335790058AFC1 /* MainMenu.xib */,
@@ -116,6 +120,7 @@
 			children = (
 				E3C9F17C1F3336370058AFC1 /* SourceEditorExtension.swift */,
 				E3C9F17E1F3336370058AFC1 /* SourceEditorCommand.swift */,
+				E3CAC4BB1F347F2E00C75AA8 /* Extensions.swift */,
 				E3C9F1801F3336370058AFC1 /* Info.plist */,
 				E3C9F17A1F3336370058AFC1 /* Supporting Files */,
 			);
@@ -183,11 +188,21 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = CY3RHPG2QU;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.Mac = {
+								enabled = 1;
+							};
+						};
 					};
 					E3C9F1741F3336370058AFC1 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = CY3RHPG2QU;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.Mac = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -243,6 +258,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3C9F17D1F3336370058AFC1 /* SourceEditorExtension.swift in Sources */,
+				E3CAC4BC1F347F2E00C75AA8 /* Extensions.swift in Sources */,
 				E3C9F17F1F3336370058AFC1 /* SourceEditorCommand.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -364,6 +380,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Imp/Imp.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = CY3RHPG2QU;
@@ -380,6 +397,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Imp/Imp.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = CY3RHPG2QU;
@@ -444,6 +462,7 @@
 				E3C9F1701F3335790058AFC1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E3C9F1841F3336370058AFC1 /* Build configuration list for PBXNativeTarget "Imp Tools" */ = {
 			isa = XCConfigurationList;
@@ -452,6 +471,7 @@
 				E3C9F1861F3336370058AFC1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
