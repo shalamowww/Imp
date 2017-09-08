@@ -10,7 +10,9 @@ import Foundation
 import XcodeKit
 
 class SourceEditorCommand: NSObject, XCSourceEditorCommand {
-    
+
+    let settings = UserDefaults.init(suiteName: Constants.settings.suiteId)!
+
     var isSwiftFile = true
     
     func perform(with invocation: XCSourceEditorCommandInvocation, completionHandler: @escaping (Error?) -> Void ) -> Void {
@@ -29,9 +31,7 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
 }
 
 extension SourceEditorCommand {
-    
-    static let suiteId = "imp.ftw"
-    
+
     fileprivate func sortImports(in text: NSMutableArray) {
         
         let importIndexes = text.indexesOfObjects(passingTest:) { (object, index, stop) -> Bool in
@@ -97,13 +97,11 @@ extension SourceEditorCommand {
     }
     
     fileprivate func shouldPutOwnHeaderOnTop() -> Bool {
-        let defaults = UserDefaults.init(suiteName: SourceEditorCommand.suiteId)
-        return !(defaults?.bool(forKey: "ignore_own_header") ?? false)
+        return !self.settings.bool(forKey: Constants.settings.ignoreOwnHeader)
     }
     
     fileprivate func shouldSeparateFrameworks() -> Bool {
-        let defaults = UserDefaults.init(suiteName: SourceEditorCommand.suiteId)
-        return !(defaults?.bool(forKey: "ignore_frameworks_section") ?? false)
+        return !self.settings.bool(forKey: Constants.settings.ignoreFrameworks)
     }
     
     fileprivate func pushOwnHeaderTop(headerIndex: Int, in lines: NSMutableArray) {

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E3284CA21F62DCDF007F6239 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3284CA11F62DCDF007F6239 /* Constants.swift */; };
+		E3284CA31F62DCDF007F6239 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3284CA11F62DCDF007F6239 /* Constants.swift */; };
 		E3C9F1651F3335790058AFC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C9F1641F3335790058AFC1 /* AppDelegate.swift */; };
 		E3C9F1671F3335790058AFC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3C9F1661F3335790058AFC1 /* Assets.xcassets */; };
 		E3C9F16A1F3335790058AFC1 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = E3C9F1681F3335790058AFC1 /* MainMenu.xib */; };
@@ -42,6 +44,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		E3284CA11F62DCDF007F6239 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E3C9F1611F3335790058AFC1 /* Imp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Imp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3C9F1641F3335790058AFC1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E3C9F1661F3335790058AFC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -100,6 +103,7 @@
 			children = (
 				E3CAC4B81F3469E100C75AA8 /* Imp.entitlements */,
 				E3C9F1641F3335790058AFC1 /* AppDelegate.swift */,
+				E3284CA11F62DCDF007F6239 /* Constants.swift */,
 				E3C9F1661F3335790058AFC1 /* Assets.xcassets */,
 				E3C9F1681F3335790058AFC1 /* MainMenu.xib */,
 				E3C9F16B1F3335790058AFC1 /* Info.plist */,
@@ -186,7 +190,7 @@
 				TargetAttributes = {
 					E3C9F1601F3335790058AFC1 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = CY3RHPG2QU;
+						DevelopmentTeam = 42K4QGQ7K4;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.Mac = {
@@ -196,7 +200,7 @@
 					};
 					E3C9F1741F3336370058AFC1 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = CY3RHPG2QU;
+						DevelopmentTeam = 42K4QGQ7K4;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.Mac = {
@@ -250,6 +254,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E3C9F1651F3335790058AFC1 /* AppDelegate.swift in Sources */,
+				E3284CA21F62DCDF007F6239 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,6 +265,7 @@
 				E3C9F17D1F3336370058AFC1 /* SourceEditorExtension.swift in Sources */,
 				E3CAC4BC1F347F2E00C75AA8 /* Extensions.swift in Sources */,
 				E3C9F17F1F3336370058AFC1 /* SourceEditorCommand.swift in Sources */,
+				E3284CA31F62DCDF007F6239 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -383,7 +389,7 @@
 				CODE_SIGN_ENTITLEMENTS = Imp/Imp.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = CY3RHPG2QU;
+				DEVELOPMENT_TEAM = 42K4QGQ7K4;
 				INFOPLIST_FILE = Imp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = shalamowww.Imp;
@@ -400,7 +406,7 @@
 				CODE_SIGN_ENTITLEMENTS = Imp/Imp.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = CY3RHPG2QU;
+				DEVELOPMENT_TEAM = 42K4QGQ7K4;
 				INFOPLIST_FILE = Imp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = shalamowww.Imp;
@@ -415,7 +421,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Imp Tools/Imp_Tools.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = CY3RHPG2QU;
+				DEVELOPMENT_TEAM = 42K4QGQ7K4;
 				INFOPLIST_FILE = "Imp Tools/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
@@ -432,7 +438,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Imp Tools/Imp_Tools.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = CY3RHPG2QU;
+				DEVELOPMENT_TEAM = 42K4QGQ7K4;
 				INFOPLIST_FILE = "Imp Tools/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
