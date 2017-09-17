@@ -12,7 +12,8 @@ import XcodeKit
 class SourceEditorCommand: NSObject, XCSourceEditorCommand {
 
     let settings = UserDefaults.init(suiteName: Constants.settings.suiteId)!
-
+    let importCommandSwift = "import"
+    let importCommandObjc = "#import"
     var isSwiftFile = true
     
     func perform(with invocation: XCSourceEditorCommandInvocation, completionHandler: @escaping (Error?) -> Void ) -> Void {
@@ -36,9 +37,9 @@ extension SourceEditorCommand {
         
         let importIndexes = text.indexesOfObjects(passingTest:) { (object, index, stop) -> Bool in
             let line = object as! String
-            if line.hasPrefix("import") {
+            if line.hasPrefix(importCommandSwift) {
                 return true
-            } else if line.hasPrefix("#import") {
+            } else if line.hasPrefix(importCommandObjc) {
                 self.isSwiftFile = false
                 return true
             } else {
@@ -50,26 +51,29 @@ extension SourceEditorCommand {
             return
         }
         
-        let importLines = text.objects(at: importIndexes)
-        let sortedLines = importLines.sorted { (obj1, obj2) -> Bool in
-            let line1 = obj1 as! String, line2 = obj2 as! String
-            return line1 < line2
+        var importLines = text.objects(at: importIndexes).map { return $0 as! String }
+        text.removeObjects(at: importIndexes)
+        
+        if self.shouldRemoveDuplicates() {
+            let linesWithoutDuplicates = NSSet.init(array: importLines)
+            importLines = linesWithoutDuplicates.allObjects as! [String]
         }
         
-        let finalLines = NSMutableArray(array: sortedLines)
-        text.removeObjects(at: importIndexes)
+        var sortedLines = importLines.sorted { return $0 < $1 }
         
         // Own header to top logic
         if !self.isSwiftFile && self.shouldPutOwnHeaderOnTop() {
             if let className = self.getFileClass(in: text.copy() as! NSArray) {
                 let classExtractionRegex = "(?<=.\").*(?=\\.h\")"
                 for (index, line) in sortedLines.enumerated() {
-                    let string = line as! String
-                    let matches = string.matches(for: classExtractionRegex)
+                    let matches = line.matches(for: classExtractionRegex)
                     if matches.count > 0 {
                         let extractedClass = matches.first!
                         if className == extractedClass {
-                            self.pushOwnHeaderTop(headerIndex: index, in: finalLines)
+                            let header = sortedLines[index]
+                            sortedLines.remove(at: index)
+                            sortedLines.insert(header, at: 0)
+                            sortedLines.insert("\n", at: 1)
                             break
                         }
                     }
@@ -78,22 +82,21 @@ extension SourceEditorCommand {
         }
         
         if self.shouldSeparateFrameworks() {
-            for (index, line) in finalLines.enumerated() {
-                let string = line as! String
-                if string.hasPrefix("#import") && string.contains("<") {
-                    finalLines.insert("\n", at: index)
+            for (index, line) in sortedLines.enumerated() {
+                if line.hasPrefix(importCommandObjc) && line.contains("<") {
+                    sortedLines.insert("\n", at: index)
                     break
                 }
             }
         }
         
         let firstImportIndex = importIndexes.first!
-        let importsRange = Range(uncheckedBounds: (lower: firstImportIndex, upper: firstImportIndex + finalLines.count))
+        let importsRange = Range(uncheckedBounds: (lower: firstImportIndex, upper: firstImportIndex + sortedLines.count))
         
         var sortedIndexSet = IndexSet()
         sortedIndexSet.insert(integersIn: importsRange)
         
-        text.insert(finalLines.copy() as! [Any], at: sortedIndexSet)
+        text.insert(sortedLines, at: sortedIndexSet)
     }
     
     fileprivate func shouldPutOwnHeaderOnTop() -> Bool {
@@ -104,11 +107,8 @@ extension SourceEditorCommand {
         return !self.settings.bool(forKey: Constants.settings.ignoreFrameworks)
     }
     
-    fileprivate func pushOwnHeaderTop(headerIndex: Int, in lines: NSMutableArray) {
-        let header = lines[headerIndex]
-        lines.removeObject(at: headerIndex)
-        lines.insert(header, at: 0)
-        lines.insert("\n", at: 1)
+    fileprivate func shouldRemoveDuplicates() -> Bool {
+        return !self.settings.bool(forKey: Constants.settings.ignoreDuplicates)
     }
     
     fileprivate func getFileClass(in text: NSArray) -> String? {

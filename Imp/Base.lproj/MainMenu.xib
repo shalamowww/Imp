@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16G29" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="12121"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -13,13 +13,7 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Imp" customModuleProvider="target">
-            <connections>
-                <outlet property="ownHeaderCheckbox" destination="xwS-oj-HWC" id="m0l-0h-pvr"/>
-                <outlet property="separatedFrameworksCheckbox" destination="Umd-Kj-Tep" id="LuW-ih-XEW"/>
-                <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
-            </connections>
-        </customObject>
+        <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Imp" customModuleProvider="target"/>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
         <menu title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
             <items>
@@ -62,12 +56,20 @@
                 </menuItem>
             </items>
         </menu>
+        <viewController id="ygd-ZH-cXh" customClass="SettingsViewController" customModule="Imp" customModuleProvider="target">
+            <connections>
+                <outlet property="ownHeaderCheckbox" destination="xwS-oj-HWC" id="e6x-dc-WnT"/>
+                <outlet property="removeDuplicatesCheckbox" destination="UhQ-Kj-KWF" id="9w3-I8-DZU"/>
+                <outlet property="separatedFrameworksCheckbox" destination="Umd-Kj-Tep" id="2fR-ea-56Y"/>
+                <outlet property="view" destination="EiT-Mj-1SZ" id="Rhk-Pp-y6S"/>
+            </connections>
+        </viewController>
         <window title="Imp" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" miniaturizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="335" y="390" width="265" height="134"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
-            <view key="contentView" wantsLayer="YES" id="EiT-Mj-1SZ">
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+            <view key="contentView" wantsLayer="YES" id="EiT-Mj-1SZ" userLabel="Settings View">
                 <rect key="frame" x="0.0" y="0.0" width="265" height="134"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
@@ -88,8 +90,16 @@
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
-                            <action selector="checkboxClicked:" target="Voe-Tx-rLC" id="Qsk-2C-Idl"/>
+                            <action selector="checkboxClicked:" target="ygd-ZH-cXh" id="kOA-4e-Lye"/>
                         </connections>
+                    </button>
+                    <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UhQ-Kj-KWF">
+                        <rect key="frame" x="18" y="18" width="229" height="18"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="check" title="Remove duplicates" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="S1Z-Kh-TGq">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
                     </button>
                     <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Umd-Kj-Tep">
                         <rect key="frame" x="18" y="42" width="229" height="18"/>
@@ -99,18 +109,9 @@
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
-                            <action selector="checkboxClicked:" target="Voe-Tx-rLC" id="AuM-Y1-eMM"/>
+                            <action selector="checkboxClicked:" target="ygd-ZH-cXh" id="mIH-3I-gKN"/>
                         </connections>
                     </button>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vF4-Hv-UNX">
-                        <rect key="frame" x="29" y="13" width="207" height="17"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Settings are under construction" id="rnX-bO-2LT">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="scrollBarColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
                 </subviews>
             </view>
             <point key="canvasLocation" x="24.5" y="-209"/>
