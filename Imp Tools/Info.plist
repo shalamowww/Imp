@@ -32,7 +32,15 @@
 					<key>XCSourceEditorCommandClassName</key>
 					<string>$(PRODUCT_MODULE_NAME).SourceEditorCommand</string>
 					<key>XCSourceEditorCommandIdentifier</key>
-					<string>sort</string>
+					<string>lines</string>
+					<key>XCSourceEditorCommandName</key>
+					<string>Sort Selected Lines</string>
+				</dict>
+				<dict>
+					<key>XCSourceEditorCommandClassName</key>
+					<string>$(PRODUCT_MODULE_NAME).SourceEditorCommand</string>
+					<key>XCSourceEditorCommandIdentifier</key>
+					<string>imports</string>
 					<key>XCSourceEditorCommandName</key>
 					<string>Sort Imports</string>
 				</dict>

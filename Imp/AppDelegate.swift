@@ -10,5 +10,5 @@ import Cocoa
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-    // an empty delegate, hehe
+// an empty delegate, hehe
 }

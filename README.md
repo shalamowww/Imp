@@ -12,8 +12,8 @@ Objective-C, Swift
 - [x] The class header on top, separated by new line
 - [x] Split frameworks and headers imports
 - [x] Remove duplicates
+- [x] Sorting selected lines
 - [ ] Cut empty lines among imports
-- [ ] Sorting selected lines
 - [ ] More flexible settings
 
 If you have an idea for a new feature, please file an issue and tell me more.
